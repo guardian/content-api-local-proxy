@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node -r esm ./src/bin/www",
-    "watch": "nodemon -r esm"
+    "watch": "nodemon -r esm",
+    "lint": "eslint ./src/**/*.js --ignore-path ./src/public/**/*",
+    "lint-fix": "eslint ./src/**/*.js --ignore-path ./src/public/**/* --fix",
+    "test": "npm run lint"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,6 +17,12 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "prettier": "1.18.2"
   }
 }
