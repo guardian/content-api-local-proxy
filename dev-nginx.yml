@@ -1,0 +1,4 @@
+name: content-api-local-proxy
+mappings:
+  - prefix: capi-proxy
+    port: 3000
