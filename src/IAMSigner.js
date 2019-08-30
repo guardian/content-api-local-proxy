@@ -12,7 +12,6 @@ export function sign(url) {
     };
 
     const { headers } = new RequestSigner(opts, credentials).sign();
-    delete headers['Host']; // to appease Node 6.10
 
     return headers;
 }

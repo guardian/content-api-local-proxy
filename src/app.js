@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import proxy from 'http-proxy-middleware';
 import querystring from 'querystring';
+import fetch from 'node-fetch';
 
 import indexRouter from './routes/index';
 import { sign } from './IAMSigner';
@@ -35,22 +36,19 @@ app.use('/live', proxy({
     }
 }));
 
-app.use('/preview', proxy({
-    target: `https://${IAM_PREVIEW_CAPI_HOST}`,
-    changeOrigin: true,
-    onProxyReq: function(proxyReq, req, res) {
-        const path = req.url.replace('/preview', '');
-        const url = new URL(`https://${IAM_PREVIEW_CAPI_HOST}${path}`);
+app.get('/preview/*', (req, res, next) => {
+    const capiPath = req.url.replace('/preview', '');
+    const capiUrl = new URL(`https://${IAM_PREVIEW_CAPI_HOST}${capiPath}`);
+    const headers = {
+        ...sign(capiUrl),
+        Accept: 'application/json'
+    };
 
-        const signedHeaders = sign(url);
-        console.log(signedHeaders);
-        const extraHeaders = {
-            Accept: 'application/json',
-            ...signedHeaders
-        };
-
-        Object.entries(extraHeaders).forEach(([key, value]) => proxyReq.setHeader(key, value));
-    }
-}));
+    fetch(capiUrl, { headers })
+        .then(_ => _.json())
+        .then(({ response }) => {
+            res.send(response);
+        });
+});
 
 export default app;
