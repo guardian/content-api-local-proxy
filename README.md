@@ -2,6 +2,8 @@
 
 A local proxy to CAPI that handles authentication.
 
+**FOR LOCAL USE ONLY**
+
 ## Running
 💻 Clone repo `git clone git@github.com:guardian/content-api-local-proxy.git`
 
