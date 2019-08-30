@@ -10,3 +10,5 @@ brew bundle --file="${ROOT_DIR}"/Brewfile
 dev-nginx setup-app "${ROOT_DIR}"/dev-nginx.yml
 
 npm install
+
+cp "${ROOT_DIR}"/.env.example "${ROOT_DIR}"/.env
