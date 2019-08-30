@@ -2,11 +2,9 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import proxy from 'http-proxy-middleware';
 import querystring from 'querystring';
 import fetch from 'node-fetch';
 
-import indexRouter from './routes/index';
 import { sign } from './IAMSigner';
 import { LIVE_CAPI_HOST, LIVE_CAPI_API_KEY, IAM_PREVIEW_CAPI_HOST } from './config';
 
@@ -18,23 +16,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.get('/live/*', (req, res, next) => {
+    const capiPath = req.url.replace('/live', '');
+    const [path, qs] = capiPath.split('?');
+    const apiKey = {
+        'api-key': LIVE_CAPI_API_KEY
+    };
 
-app.use('/live', proxy({
-    target: `https://${LIVE_CAPI_HOST}`,
-    changeOrigin: true,
-    pathRewrite: (path, req) => {
-        const splitPath = path.split('?');
-        const hasQs = splitPath.length === 2;
+    const qsWithKey = qs ? { ...querystring.parse(qs), ...apiKey} : apiKey;
 
-        const apiKey = {
-            'api-key': LIVE_CAPI_API_KEY
-        };
+    const capiUrl = new URL(`https://${LIVE_CAPI_HOST}${path}?${querystring.stringify(qsWithKey)}`);
 
-        const qs = hasQs ? { ...querystring.parse(splitPath[1]), ...apiKey} : apiKey;
-        return `${splitPath[0]}?${querystring.stringify(qs)}`.replace('/live', '');
-    }
-}));
+    fetch(capiUrl, {})
+        .then(_ => _.json())
+        .then(({ response }) => {
+            res.send(response);
+        });
+});
 
 app.get('/preview/*', (req, res, next) => {
     const capiPath = req.url.replace('/preview', '');
