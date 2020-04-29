@@ -11,4 +11,22 @@ dev-nginx setup-app "${ROOT_DIR}"/dev-nginx.yml
 
 npm install
 
-cp "${ROOT_DIR}"/.env.example "${ROOT_DIR}"/.env
+if  [ -f "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+    nvm use
+  else
+    node_version=`cat .nvmrc`
+    echo -e "nvm not found: please ensure you're using node $node_version\r\n"
+    echo -e "NVM is not required to run this project, but we recommend using it to easily manage node versions"
+    echo -e "Install it from https://github.com/creationix/nvm#installation\r\n\r\n"
+  fi
+
+FILE=.env
+
+if [ -f "$FILE" ]; then
+    echo "Using config properies from $FILE file"
+else 
+    echo "$FILE does not exist, creating from template..."
+    cp "${ROOT_DIR}"/.env.example "${ROOT_DIR}"/.env
+    echo "Please complete your $FILE file!"
+fi
