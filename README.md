@@ -11,7 +11,7 @@ See [documentation for the Content API](https://open-platform.theguardian.com/do
 
 🔌 Run `./script/setup`
 
-📝 Fill in `.env`
+📝 Fill in `.env` – see the template in `.env.example`. API keys can be acquired at `https://bonobo.capi.gutools.co.uk/register/developer`.
 
 🔌 Run `./script/start`
 
