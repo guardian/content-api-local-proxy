@@ -10,7 +10,7 @@
     "test": "npm run lint"
   },
   "dependencies": {
-    "aws-sdk": "^2.520.0",
+    "aws-sdk": "^2.783.0",
     "aws4": "^1.8.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
