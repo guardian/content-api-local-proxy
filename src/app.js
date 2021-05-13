@@ -42,10 +42,10 @@ app.get('/preview/*', (req, res, next) => {
         Accept: 'application/json'
     };
 
-    fetch(capiUrl, { headers })
-        .then(_ => _.json())
-        .then(({ response }) => {
-            res.send(response);
+    return fetch(capiUrl, { headers })
+        .then(result => result.json().then(parsedJson => ({ parsedJson, result })))
+        .then(({ parsedJson, result }) => {
+          res.status(result.status).send(parsedJson.response || parsedJson.message);
         });
 });
 
