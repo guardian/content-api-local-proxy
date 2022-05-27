@@ -13,6 +13,8 @@ See [documentation for the Content API](https://open-platform.theguardian.com/do
 
 📝 Fill in `.env`
 
+🎭 Make sure you have CAPI credentials from Janus
+
 🔌 Run `./script/start`
 
 🌍 Open `https://capi-proxy.local.dev-gutools.co.uk` in your browser
