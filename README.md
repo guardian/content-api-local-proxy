@@ -13,6 +13,8 @@ See [documentation for the Content API](https://open-platform.theguardian.com/do
 
 📝 Fill in `.env` – see the template in `.env.example`. API keys can be acquired at `https://bonobo.capi.gutools.co.uk/register/developer`.
 
+🎭 [For preview] Make sure you have up-to-date AWS credentials for the 'Content API' account.
+
 🔌 Run `./script/start`
 
 🌍 Open `https://capi-proxy.local.dev-gutools.co.uk` in your browser
