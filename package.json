@@ -10,21 +10,21 @@
     "test": "npm run lint"
   },
   "dependencies": {
-    "aws-sdk": "^2.520.0",
+    "aws-sdk": "^2.1637.0",
     "aws4": "^1.8.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
-    "express": "~4.16.1",
+    "express": "^4.19.2",
     "morgan": "~1.9.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "eslint": "^6.2.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^3.1.0",
     "nodemon": "^1.19.1",
     "prettier": "1.18.2"
