@@ -9,17 +9,17 @@ brew bundle --file="${ROOT_DIR}"/Brewfile
 
 dev-nginx setup-app "${ROOT_DIR}"/dev-nginx.yml
 
-npm install
-
 if  [ -f "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh"
-    nvm use
-  else
-    node_version=`cat .nvmrc`
-    echo -e "nvm not found: please ensure you're using node $node_version\r\n"
-    echo -e "NVM is not required to run this project, but we recommend using it to easily manage node versions"
-    echo -e "Install it from https://github.com/creationix/nvm#installation\r\n\r\n"
-  fi
+  source "$NVM_DIR/nvm.sh"
+  nvm use
+else
+  node_version=`cat .nvmrc`
+  echo -e "nvm not found: please ensure you're using node $node_version\r\n"
+  echo -e "NVM is not required to run this project, but we recommend using it to easily manage node versions"
+  echo -e "Install it from https://github.com/creationix/nvm#installation\r\n\r\n"
+fi
+
+npm install
 
 FILE=.env
 
