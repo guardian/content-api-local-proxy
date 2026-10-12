@@ -11,6 +11,7 @@ import { LIVE_CAPI_HOST, LIVE_CAPI_API_KEY, IAM_PREVIEW_CAPI_HOST } from './conf
 const app = express();
 
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -29,7 +30,7 @@ app.get('/live/*', (req, res, next) => {
 
     fetch(capiUrl, {})
         .then(_ => _.json())
-        .then(({ response }) => {
+        .then((response) => {
             res.send(response);
         });
 });
@@ -45,7 +46,7 @@ app.get('/preview/*', (req, res, next) => {
     return fetch(capiUrl, { headers })
         .then(result => result.json().then(parsedJson => ({ parsedJson, result })))
         .then(({ parsedJson, result }) => {
-          res.status(result.status).send(parsedJson.response || parsedJson.message);
+          res.status(result.status).send(parsedJson);
         });
 });
 
